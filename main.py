@@ -27,7 +27,23 @@ class Deck:
     def shuffle(self):
         random.shuffle(self.cards)
 
+    def draw(self):
+        return self.cards.pop()
+
 class Player:
-    def __init__(self):
-        pass
+    def __init__(self, name, isCpu = True):
+        self.name = name
+        self.hand = []
+        self.cpu = isCpu
+
+    def draw(self, deck):
+        self.hand.append(deck.draw())
+        return self
+
+    def show(self):
+        for card in self.hand:
+            card.show()
+
+    def sayName(self):
+        print("My name is " + self.name)
 
