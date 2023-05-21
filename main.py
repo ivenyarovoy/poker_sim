@@ -1,3 +1,5 @@
+import random
+
 class Card:
     def __init__(self, suit, value):
         self.suit = suit
@@ -18,6 +20,12 @@ class Deck:
     def show(self):
         for card in self.cards:
             card.show()
+
+    def count(self):
+        print(len(self.cards))
+
+    def shuffle(self):
+        random.shuffle(self.cards)
 
 class Player:
     def __init__(self):
