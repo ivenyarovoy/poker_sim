@@ -35,10 +35,9 @@ class Deck:
 
 
 class Player:
-    def __init__(self, name, isCpu=True):
+    def __init__(self, name):
         self.name = name
         self.hand = []
-        self.cpu = isCpu
 
     def draw(self, deck):
         self.hand.append(deck.draw())
