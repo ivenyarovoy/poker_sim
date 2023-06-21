@@ -33,6 +33,12 @@ class Deck:
     def draw(self):
         return self.cards.pop()
 
+    def reset(self):
+        self.cards=[]
+        self.build()
+        self.shuffle()
+        print("Deck reset!")
+
 
 class Player:
     def __init__(self, name):
@@ -62,8 +68,8 @@ class Community_Cards:
 
     def turn(self, deck):
         card = deck.draw()
+        print("Turn: {}".format(card.show()))
         self.cards.append(card)
-        print("Turn: {}".format(card))
 
     def burn(deck, discard_pile):
         card = deck.draw()
@@ -74,6 +80,18 @@ class Community_Cards:
         for card in self.cards:
             card.show()
 
+    def clear(self):
+        self.cards=[]
+        print("Community cards cleared!")
+
 
 if __name__=="__main__":
-
+    nathan=Player("Nathan")
+    deck=Deck()
+    deck.shuffle()
+    comm=Community_Cards()
+    comm.show()
+    comm.turn(deck)
+    comm.show()
+    deck.reset()
+    comm.clear()
