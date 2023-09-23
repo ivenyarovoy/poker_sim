@@ -88,14 +88,19 @@ class Community_Cards:
         self.cards=[]
         print("Community cards cleared!")
 
+def startGame(**kwargs):
+    if not 'players' in kwargs:
+        while True:
+            try:
+                players = int(input("Enter number of players (2-9):\n"))
+                if players < 2 or players > 9:
+                    raise ValueError
+                break
+
+            except ValueError:
+                print("Invalid input. Enter a number between 2-9.")
+
+
 
 if __name__=="__main__":
-    nathan=Player("Nathan")
-    deck=Deck()
-    deck.shuffle()
-    comm=Community_Cards()
-    comm.show()
-    comm.turn(deck)
-    comm.show()
-    deck.reset()
-    comm.clear()
+    startGame()
