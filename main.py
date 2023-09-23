@@ -9,6 +9,10 @@ class Card:
     def show(self):
         print("{} of {}".format(self.value, self.suit))
 
+    def val(self):
+        val = "{} of {}".format(self.value, self.suit)
+        return str(val)
+
 
 class Deck:
     def __init__(self):
@@ -68,7 +72,7 @@ class Community_Cards:
 
     def turn(self, deck):
         card = deck.draw()
-        print("Turn: {}".format(card.show()))
+        print("Turn: "+card.val())
         self.cards.append(card)
 
     def burn(deck, discard_pile):
@@ -77,6 +81,7 @@ class Community_Cards:
         print("Burn: {}".format(card.show()))
 
     def show(self):
+        if not self.cards: print("There are no community cards")
         for card in self.cards:
             card.show()
 
