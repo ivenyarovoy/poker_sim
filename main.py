@@ -82,8 +82,7 @@ class Community_Cards:
 
     def show(self):
         if not self.cards: print("There are no community cards")
-        for card in self.cards:
-            card.show()
+        print(", ".join([card.val() for card in self.cards]))
 
     def clear(self):
         self.cards=[]
