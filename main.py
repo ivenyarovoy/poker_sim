@@ -46,11 +46,12 @@ class Deck:
 
 
 class Player:
-    def __init__(self, name, position, position_text):
+    def __init__(self, name, position, position_text, chips=1000):
         self.name = name
         self.hand = []
         self.position = position
         self.position_text = ""
+        self.chips = chips
 
     def draw(self, deck):
         self.hand.append(deck.draw())
@@ -133,11 +134,10 @@ def startGame(num_players=6, pick_position=False):
     # Allows text-based position selecting
     if pick_position:
         try:
-            position_text = input("Enter the desired 2- or 3- letter position code:\n")
-            position = position_options.index(position_text)
+            _ = input("Enter the desired 2- or 3- letter position code:\n")
+            player_position = position_options.index(_)
         except:
             player_position = random.randint(0,num_players)
-            position_text = position_options[position]
     else:
         player_position = random.randint(0,num_players)
 
@@ -151,7 +151,7 @@ def startGame(num_players=6, pick_position=False):
     for idx, pos in enumerate(position_options):
         # Skip making NPC if player position
         if idx == player_position:
-            players.append(Player("You", player_position))
+            players.append(Player("You", player_position, ))
             continue
 
         players.append(Player(names.pop(), pos))
