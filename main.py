@@ -158,6 +158,20 @@ def startGame(num_players=None, pick_position=False):
 
     print("You are now in position: {}".format(position_text))
 
+    current_player = 0
+
+    # Deal cards
+    deck = Deck()
+    print("Shuffling deck...")
+    deck.shuffle()
+    for i in range(2):
+        for player in players:
+            player.draw(deck)
+
+    # Show cards to player
+    print("Your cards:")
+    players[position].show()
+
 
 if __name__ == "__main__":
     startGame()
