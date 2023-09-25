@@ -88,7 +88,7 @@ class Community_Cards:
         self.cards=[]
         print("Community cards cleared!")
 
-def setPositionOptions(num_players):
+def setposition_options(num_players):
     if num_players == 2:
         return ['SB', 'BB']
     elif num_players == 3:
@@ -106,8 +106,7 @@ def setPositionOptions(num_players):
     else:
         return ['UTG', 'UTG+1', 'MP1', 'MP2', 'MP3', 'CO', 'BTN', 'SB', 'BB']
 
-def startGame(players=None, pickPosition=False):
-
+def startGame(players=None, pick_position=False):
     if not players:
         while True:
             try:
@@ -119,17 +118,23 @@ def startGame(players=None, pickPosition=False):
             except ValueError:
                 print("Invalid input. Enter a number between 2-9.")
 
-    positionOptions = setPositionOptions(players)
+    position_options = setposition_options(players)
 
-    if pickPosition:
+
+    if pick_position:
         position = input("Enter the desired 2- or 3- letter position code:\n")
-        if position not in positionOptions:
-            position = random.choice(positionOptions)
+        if position not in position_options:
+            position = random.choice(position_options)
     else:
-        position = random.choice(positionOptions)
+        position = random.choice(position_options)
+
+    # Create NPCs
+    for idx, pos in position_options:
+
 
     print("You are now in position: {}".format(position))
-    position_index = positionOptions.index(position)
+    position_index = position_options.index(position)
+    starting_player_index = 0
 
 
 
