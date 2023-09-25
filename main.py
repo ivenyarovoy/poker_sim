@@ -46,9 +46,11 @@ class Deck:
 
 
 class Player:
-    def __init__(self, name, position):
+    def __init__(self, name, position, position_text):
         self.name = name
         self.hand = []
+        self.position = position
+        self.position_text = ""
 
     def draw(self, deck):
         self.hand.append(deck.draw())
@@ -134,11 +136,10 @@ def startGame(num_players=6, pick_position=False):
             position_text = input("Enter the desired 2- or 3- letter position code:\n")
             position = position_options.index(position_text)
         except:
-            position = random.randint(0,num_players)
+            player_position = random.randint(0,num_players)
             position_text = position_options[position]
     else:
-        position = random.randint(0,num_players)
-        position_text = position_options[position]
+        player_position = random.randint(0,num_players)
 
     # Creates a bank of names
     names = []
@@ -149,8 +150,8 @@ def startGame(num_players=6, pick_position=False):
     # Create NPCs
     for idx, pos in enumerate(position_options):
         # Skip making NPC if player position
-        if idx == position:
-            players.append(Player("You", position))
+        if idx == player_position:
+            players.append(Player("You", player_position))
             continue
 
         players.append(Player(names.pop(), pos))
@@ -170,7 +171,10 @@ def startGame(num_players=6, pick_position=False):
 
     # Show cards to player
     print("Your cards:")
-    players[position].show()
+    players[player_position].show()
+
+    # Betting round
+    print("Betting round begins!")
 
 
 if __name__ == "__main__":
