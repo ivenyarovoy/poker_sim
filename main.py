@@ -113,7 +113,7 @@ def setposition_options(num_players):
         return ["UTG", "UTG+1", "MP1", "MP2", "MP3", "CO", "BTN", "SB", "BB"]
 
 
-def startGame(num_players=None, pick_position=False):
+def startGame(num_players=6, pick_position=False):
     print("Welcome to Poker!")
     if not num_players:
         while True:
