@@ -114,6 +114,7 @@ def setposition_options(num_players):
 
 
 def startGame(num_players=None, pick_position=False):
+    print("Welcome to Poker!")
     if not num_players:
         while True:
             try:
