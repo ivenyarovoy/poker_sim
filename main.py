@@ -113,34 +113,49 @@ def setposition_options(num_players):
         return ["UTG", "UTG+1", "MP1", "MP2", "MP3", "CO", "BTN", "SB", "BB"]
 
 
-def startGame(players=None, pick_position=False):
-    if not players:
+def startGame(num_players=None, pick_position=False):
+    if not num_players:
         while True:
             try:
-                players = int(input("Enter number of players (2-9):\n"))
-                if players < 2 or players > 9:
+                num_players = int(input("Enter number of players (2-9):\n"))
+                if num_players < 2 or num_players > 9:
                     raise ValueError
                 break
 
             except ValueError:
                 print("Invalid input. Enter a number between 2-9.")
 
-    position_options = setposition_options(players)
+    position_options = setposition_options(num_players)
 
+    # Allows text-based position selecting
     if pick_position:
-        position = input("Enter the desired 2- or 3- letter position code:\n")
-        if position not in position_options:
-            position = random.choice(position_options)
+        try:
+            position_text = input("Enter the desired 2- or 3- letter position code:\n")
+            position = position_options.index(position_text)
+        except:
+            position = random.randint(0,num_players)
+            position_text = position_options[position]
     else:
-        position = random.choice(position_options)
+        position = random.randint(0,num_players)
+        position_text = position_options[position]
 
+    # Creates a bank of names
+    names = []
+    for i in range(num_players):
+        names.append(faker.Faker().name())
+
+    players = []
     # Create NPCs
-    for idx, pos in position_options:
-        pass
+    for idx, pos in enumerate(position_options):
+        # Skip making NPC if player position
+        if idx == position:
+            players.append(Player("You", position))
+            continue
 
-    print("You are now in position: {}".format(position))
-    position_index = position_options.index(position)
-    starting_player_index = 0
+        players.append(Player(names.pop(), pos))
+
+
+    print("You are now in position: {}".format(position_text))
 
 
 if __name__ == "__main__":
