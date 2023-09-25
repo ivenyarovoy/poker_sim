@@ -1,4 +1,5 @@
 import random
+import faker
 
 
 class Card:
@@ -45,7 +46,7 @@ class Deck:
 
 
 class Player:
-    def __init__(self, name):
+    def __init__(self, name, position):
         self.name = name
         self.hand = []
 
