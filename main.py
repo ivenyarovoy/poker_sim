@@ -94,7 +94,7 @@ class Community_Cards:
         print("Community cards cleared!")
 
 
-def setposition_options(num_players):
+def set_position_options(num_players):
     if num_players == 2:
         return ["SB", "BB"]
     elif num_players == 3:
@@ -126,7 +126,7 @@ def startGame(num_players=6, pick_position=False):
             except ValueError:
                 print("Invalid input. Enter a number between 2-9.")
 
-    position_options = setposition_options(num_players)
+    position_options = set_position_options(num_players)
 
     # Allows text-based position selecting
     if pick_position:
