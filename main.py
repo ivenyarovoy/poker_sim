@@ -38,7 +38,7 @@ class Deck:
         return self.cards.pop()
 
     def reset(self):
-        self.cards=[]
+        self.cards = []
         self.build()
         self.shuffle()
         print("Deck reset!")
@@ -60,11 +60,14 @@ class Player:
     def sayName(self):
         print("My name is " + self.name)
 
+
 class Discard_Pile:
     def __init__(self):
         cards = []
+
     def add(self, card):
         self.cards.append(card)
+
 
 class Community_Cards:
     def __init__(self):
@@ -72,7 +75,7 @@ class Community_Cards:
 
     def turn(self, deck):
         card = deck.draw()
-        print("Turn: "+card.val())
+        print("Turn: " + card.val())
         self.cards.append(card)
 
     def burn(deck, discard_pile):
@@ -81,30 +84,33 @@ class Community_Cards:
         print("Burn: {}".format(card.show()))
 
     def show(self):
-        if not self.cards: print("There are no community cards")
+        if not self.cards:
+            print("There are no community cards")
         print(", ".join([card.val() for card in self.cards]))
 
     def clear(self):
-        self.cards=[]
+        self.cards = []
         print("Community cards cleared!")
+
 
 def setposition_options(num_players):
     if num_players == 2:
-        return ['SB', 'BB']
+        return ["SB", "BB"]
     elif num_players == 3:
-        return ['BTN', 'SB', 'BB']
+        return ["BTN", "SB", "BB"]
     elif num_players == 4:
-        return ['CO', 'BTN', 'SB', 'BB']
+        return ["CO", "BTN", "SB", "BB"]
     elif num_players == 5:
-        return ['MP1', 'CO', 'BTN', 'SB', 'BB']
+        return ["MP1", "CO", "BTN", "SB", "BB"]
     elif num_players == 6:
-        return ['UTG', 'MP1', 'CO', 'BTN', 'SB', 'BB']
+        return ["UTG", "MP1", "CO", "BTN", "SB", "BB"]
     elif num_players == 7:
-        return ['UTG', 'UTG+1', 'MP1', 'CO', 'BTN', 'SB', 'BB']
+        return ["UTG", "UTG+1", "MP1", "CO", "BTN", "SB", "BB"]
     elif num_players == 8:
-        return ['UTG', 'UTG+1', 'MP1', 'MP2', 'CO', 'BTN', 'SB', 'BB']
+        return ["UTG", "UTG+1", "MP1", "MP2", "CO", "BTN", "SB", "BB"]
     else:
-        return ['UTG', 'UTG+1', 'MP1', 'MP2', 'MP3', 'CO', 'BTN', 'SB', 'BB']
+        return ["UTG", "UTG+1", "MP1", "MP2", "MP3", "CO", "BTN", "SB", "BB"]
+
 
 def startGame(players=None, pick_position=False):
     if not players:
@@ -120,7 +126,6 @@ def startGame(players=None, pick_position=False):
 
     position_options = setposition_options(players)
 
-
     if pick_position:
         position = input("Enter the desired 2- or 3- letter position code:\n")
         if position not in position_options:
@@ -130,15 +135,12 @@ def startGame(players=None, pick_position=False):
 
     # Create NPCs
     for idx, pos in position_options:
-
+        pass
 
     print("You are now in position: {}".format(position))
     position_index = position_options.index(position)
     starting_player_index = 0
 
 
-
-
-
-if __name__=="__main__":
+if __name__ == "__main__":
     startGame()
