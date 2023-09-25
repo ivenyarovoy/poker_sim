@@ -88,8 +88,27 @@ class Community_Cards:
         self.cards=[]
         print("Community cards cleared!")
 
-def startGame(**kwargs):
-    if not 'players' in kwargs:
+def setPositionOptions(num_players):
+    if num_players == 2:
+        return ['SB', 'BB']
+    elif num_players == 3:
+        return ['BTN', 'SB', 'BB']
+    elif num_players == 4:
+        return ['CO', 'BTN', 'SB', 'BB']
+    elif num_players == 5:
+        return ['MP1', 'CO', 'BTN', 'SB', 'BB']
+    elif num_players == 6:
+        return ['UTG', 'MP1', 'CO', 'BTN', 'SB', 'BB']
+    elif num_players == 7:
+        return ['UTG', 'UTG+1', 'MP1', 'CO', 'BTN', 'SB', 'BB']
+    elif num_players == 8:
+        return ['UTG', 'UTG+1', 'MP1', 'MP2', 'CO', 'BTN', 'SB', 'BB']
+    else:
+        return ['UTG', 'UTG+1', 'MP1', 'MP2', 'MP3', 'CO', 'BTN', 'SB', 'BB']
+
+def startGame(players=None, pickPosition=False):
+
+    if not players:
         while True:
             try:
                 players = int(input("Enter number of players (2-9):\n"))
@@ -99,6 +118,20 @@ def startGame(**kwargs):
 
             except ValueError:
                 print("Invalid input. Enter a number between 2-9.")
+
+    positionOptions = setPositionOptions(players)
+
+    if pickPosition:
+        position = input("Enter the desired 2- or 3- letter position code:\n")
+        if position not in positionOptions:
+            position = random.choice(positionOptions)
+    else:
+        position = random.choice(positionOptions)
+
+    print("You are now in position: {}".format(position))
+    position_index = positionOptions.index(position)
+
+
 
 
 
