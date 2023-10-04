@@ -63,6 +63,10 @@ class Player:
     def sayName(self):
         print("My name is " + self.name)
 
+    def bet(self, amount):
+        self.chips -= amount
+        return amount
+
 
 class Discard_Pile:
     def __init__(self):
@@ -174,6 +178,38 @@ def startGame(num_players=6, pick_position=False):
 
     # Betting round
     print("Betting round begins!")
+    highest_bet, pot, current_player = 0, 0, 0
+    # TODO: Make this variable
+    small_blind, big_blind = 5, 10
+    call_bet = big_blind
+    players_in_betting_round = players.copy()
+    # Enter an infinite loop until betting round is over
+    while True:
+        for player in players_in_betting_round:
+            # Check if player has chips
+            if player.chips == 0:
+                players_in_betting_round.remove(player)
+                continue
+
+            # TODO: make user input
+            if player.name is "You":
+                continue
+
+            # If player has less chips than call, they are all-in
+            if player.chips <= call_bet:
+                pot += player.chips
+                print("{} is all-in!".format(player.position_text))
+                player.bet(player.chips)
+                players_in_betting_round.remove(player)
+                continue
+
+            # TODO: Make this more AI like, for now it is random
+            player_bet = random.randint(big_blind, player.chips)
+            if player_bet > highest_bet:
+                highest_bet = player_bet
+            pot += player_bet
+            player.bet(player_bet)
+            print("{} bets {}".format(player.position_text, player_bet))
 
 
 if __name__ == "__main__":
