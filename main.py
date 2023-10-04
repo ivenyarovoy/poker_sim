@@ -140,9 +140,9 @@ def startGame(num_players=6, pick_position=False):
             _ = input("Enter the desired 2- or 3- letter position code:\n")
             player_position = position_options.index(_)
         except:
-            player_position = random.randint(0,num_players)
+            player_position = random.randint(0, num_players)
     else:
-        player_position = random.randint(0,num_players)
+        player_position = random.randint(0, num_players)
 
     # Creates a bank of names
     names = []
@@ -158,7 +158,6 @@ def startGame(num_players=6, pick_position=False):
             continue
 
         players.append(Player(names.pop(), pos))
-
 
     print("You are now in position: {}".format(players[player_position].position_text))
 
