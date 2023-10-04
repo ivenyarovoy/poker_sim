@@ -200,6 +200,7 @@ def startGame(num_players=6, pick_position=False):
                 if bet_or_fold != "b":
                     print("You fold!")
                     players_in_betting_round.remove(player)
+                    break
                 # Gets a valid bet
                 while True:
                     try:
@@ -208,14 +209,15 @@ def startGame(num_players=6, pick_position=False):
                             raise ValueError
                         if player_bet > player.chips:
                             raise IndexError
+                        break
                     except ValueError as ve:
                         print("You must enter at least as much as the previous bet.")
                     except IndexError as ie:
                         print("You do not have enough chips to bet that much.")
-                    break
                 print("You bet {}".format(player_bet))
                 player.bet(player_bet)
                 pot += player_bet
+                continue
 
             # If player has less chips than call, they are all-in
             if player.chips <= call_bet:
@@ -226,7 +228,7 @@ def startGame(num_players=6, pick_position=False):
                 continue
 
             # TODO: Make this more AI like, for now it is random
-            player_bet = random.randint(big_blind, player.chips)
+            player_bet = random.randint(highest_bet, player.chips)
             if player_bet > highest_bet:
                 highest_bet = player_bet
             pot += player_bet
