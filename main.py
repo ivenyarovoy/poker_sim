@@ -219,21 +219,27 @@ def startGame(num_players=6, pick_position=False):
                 pot += player_bet
                 continue
 
-            # If player has less chips than call, they are all-in
-            if player.chips <= call_bet:
-                pot += player.chips
-                print("{} is all-in!".format(player.position_text))
-                player.bet(player.chips)
+            bet = bool(random.getrandbits(1))
+            if bet:
+                # If player has less chips than call, they are all-in
+                if player.chips <= call_bet:
+                    pot += player.chips
+                    print("{} is all-in!".format(player.position_text))
+                    player.bet(player.chips)
+                    players_in_betting_round.remove(player)
+                    continue
+
+                # TODO: Make this more AI like, for now it is random
+                player_bet = random.randint(highest_bet, player.chips)
+                if player_bet > highest_bet:
+                    highest_bet = player_bet
+                pot += player_bet
+                player.bet(player_bet)
+                print("{} bets {}".format(player.position_text, player_bet))
+            else:
+                print("{} folds!".format(player.position_text))
                 players_in_betting_round.remove(player)
                 continue
-
-            # TODO: Make this more AI like, for now it is random
-            player_bet = random.randint(highest_bet, player.chips)
-            if player_bet > highest_bet:
-                highest_bet = player_bet
-            pot += player_bet
-            player.bet(player_bet)
-            print("{} bets {}".format(player.position_text, player_bet))
         break
 
 
