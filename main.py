@@ -46,11 +46,10 @@ class Deck:
 
 
 class Player:
-    def __init__(self, name, position, position_text, chips=1000):
+    def __init__(self, name, position_text, chips=1000):
         self.name = name
         self.hand = []
-        self.position = position
-        self.position_text = ""
+        self.position_text = position_text
         self.chips = chips
 
     def draw(self, deck):
@@ -151,13 +150,13 @@ def startGame(num_players=6, pick_position=False):
     for idx, pos in enumerate(position_options):
         # Skip making NPC if player position
         if idx == player_position:
-            players.append(Player("You", player_position, ))
+            players.append(Player("You", pos ))
             continue
 
         players.append(Player(names.pop(), pos))
 
 
-    print("You are now in position: {}".format(position_text))
+    print("You are now in position: {}".format(players[player_position].position_text))
 
     current_player = 0
 
