@@ -192,7 +192,30 @@ def startGame(num_players=6, pick_position=False):
 
             # TODO: make user input
             if player.name is "You":
-                continue
+                print ("Your turn!")
+                print ("Your cards:")
+                player.show()
+                print ("Your stack: {}".format(player.chips))
+                bet_or_fold = input("Enter 'b' to bet or 'f' to fold:\n")
+                if bet_or_fold != "b":
+                    print("You fold!")
+                    players_in_betting_round.remove(player)
+                # Gets a valid bet
+                while True:
+                    try:
+                        player_bet = int(input("Enter bet amount: "))
+                        if player_bet < highest_bet:
+                            raise ValueError
+                        if player_bet > player.chips:
+                            raise IndexError
+                    except ValueError as ve:
+                        print("You must enter at least as much as the previous bet.")
+                    except IndexError as ie:
+                        print("You do not have enough chips to bet that much.")
+                    break
+                print("You bet {}".format(player_bet))
+                player.bet(player_bet)
+                pot += player_bet
 
             # If player has less chips than call, they are all-in
             if player.chips <= call_bet:
@@ -209,6 +232,7 @@ def startGame(num_players=6, pick_position=False):
             pot += player_bet
             player.bet(player_bet)
             print("{} bets {}".format(player.position_text, player_bet))
+        break
 
 
 if __name__ == "__main__":
