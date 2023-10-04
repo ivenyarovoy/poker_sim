@@ -150,7 +150,7 @@ def startGame(num_players=6, pick_position=False):
     for idx, pos in enumerate(position_options):
         # Skip making NPC if player position
         if idx == player_position:
-            players.append(Player("You", pos ))
+            players.append(Player("You", pos))
             continue
 
         players.append(Player(names.pop(), pos))
