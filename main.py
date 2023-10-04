@@ -161,8 +161,6 @@ def startGame(num_players=6, pick_position=False):
 
     print("You are now in position: {}".format(players[player_position].position_text))
 
-    current_player = 0
-
     # Deal cards
     deck = Deck()
     print("Shuffling deck...")
